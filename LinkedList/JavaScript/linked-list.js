@@ -73,4 +73,39 @@ export class LinkedList {
         const prev = this.get(idx - 1);
         prev.next = prev.next?.next ?? null;
     }
+
+    pop() {
+        const tail = this.tail;
+        if (this.size > 1) {
+            const newTail = this.get(this.size - 2);
+            newTail.next = null;
+            this.tail = newTail;
+            this.size--;
+        } else {
+            this.tail = this.head = null;
+            this.size = 0;
+        }
+
+        return tail;
+    }
+
+    reverse() {
+        let prev = null;
+        let cur = this.tail = this.head;
+
+        while (cur !== null) {
+            const next = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = next;
+        }
+
+        return this.head = prev;
+    }
+
+    clear() {
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
+    }
 }
